@@ -20,6 +20,7 @@ function App() {
         <Route path="/tipos-favoritos/:id" element={<TipoFavoritoForm />} />
         <Route path="/favoritos" element={<FavoritoPagina />} />
         <Route path="/favoritos/add" element={<FavoritoForm />} />
+        <Route path="/favoritos/:id" element={<FavoritoForm />} />
         <Route path="/favoritos-user" element={<FavoritoUserPagina />} />
         <Route path="/favoritos-user/add" element={<FavoritoUserForm />} />
       </Routes>
