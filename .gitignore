@@ -152,8 +152,7 @@ target/
 ### Django ###
 *.log
 *.pot
-*.pyc
-__pycache__/
+*.py
 local_settings.py
 
 .env
