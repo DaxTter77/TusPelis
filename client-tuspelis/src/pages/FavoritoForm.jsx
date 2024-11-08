@@ -1,20 +1,47 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { createFavorito } from '../api/favoritos.api';
+import { useNavigate, useParams } from 'react-router-dom'
+import { createFavorito, getFavorito, updateFavorito, deleteFavorito } from '../api/favoritos.api';
 import { getAllTipos } from '../api/tiposFavoritos.api';
 
 
 export function FavoritoForm(){
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue,} = useForm();
+    const params = useParams();
     const navigate = useNavigate();
     const [listaData, setListaData] = useState([]);    
 
     const onSubmit = handleSubmit(async data => {
         console.log(data);
-        const res = await createFavorito(data);
-        console.log(res);
+        //validacion
+        if(params.id){
+            console.log("modificando");
+            await updateFavorito(params.id, data);
+        }else{
+            const res = await createFavorito(data);
+            console.log(res);
+        }
+      
+        navigate("/favoritos");
     });
+
+    //para rellenar el formulario si hay un parametro en la url
+    useEffect(() => {
+        async function loadData() {
+            if(params.id){
+                console.log("solicitar datos");
+                const res = await getFavorito(params.id);
+                console.log(res);
+                setValue('titulo', res.data.titulo);
+                setValue('sinopsis', res.data.sinopsis);
+                setValue('anio', res.data.anio);
+                setValue('rating_general', res.data.rating_general);
+                setValue('genero', res.data.genero);
+                setValue('id_tipo', res.data.id_tipo);
+            }
+        }
+        loadData();
+    },[])
 
     useEffect(() => {
         const loadData = async ()  => {
@@ -65,6 +92,20 @@ export function FavoritoForm(){
                 {errors.id_tipo && <span style={{color:"red"}}>El tipo favorito es requerido</span>}
                 <button>Guardar</button>
             </form>
+            {params.id && 
+                (<button
+                    onClick={async() => {
+                        const accepted = window.confirm("¿Desea eliminar el tipo?");
+                        if(accepted){
+                            const res = await deleteFavorito(params.id);
+                        }
+                        navigate("/favoritos");
+                    }}
+                >
+                    Eliminar
+                </button>)
+            }
+            
         </div>
 
     )

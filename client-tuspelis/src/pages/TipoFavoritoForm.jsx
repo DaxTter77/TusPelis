@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { createTipo, deleteTipo } from '../api/tiposFavoritos.api';
+import { createTipo, deleteTipo, updateTipo, getTipo } from '../api/tiposFavoritos.api';
 
 export function TipoFavoritoForm(){
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors },setValue } = useForm();
 
     const navigate = useNavigate();
 
@@ -12,9 +13,29 @@ export function TipoFavoritoForm(){
 
     const onSubmit = handleSubmit(async data => {
         console.log(data);
-        const res = await createTipo(data);
-        console.log(res);
+        //validacion
+        if(params.id){
+            console.log("modificando");
+            await updateTipo(params.id, data);
+        }else{
+            const res = await createTipo(data);
+            console.log(res);
+        }
+        navigate("/tipos-favoritos");
     });
+    useEffect(() => {
+        async function loadData() {
+            if(params.id){
+                console.log("solicitar datos");
+                const res = await getTipo(params.id);
+                console.log(res);
+                setValue('descripcion', res.data.descripcion);
+                setValue('estado', res.data.estado);
+            }
+
+        }
+        loadData();
+    },[])
 
     return (
         <div className="container">
