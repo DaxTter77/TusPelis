@@ -13,9 +13,9 @@ export function TipoFavoritoForm(){
 
     const onSubmit = handleSubmit(async data => {
         console.log(data);
-        //validacion
+        //Se valida si está modificando
         if(params.id){
-            console.log("modificando");
+            console.log("Modificando el id: " + params.id);
             await updateTipo(params.id, data);
         }else{
             const res = await createTipo(data);
@@ -26,7 +26,7 @@ export function TipoFavoritoForm(){
     useEffect(() => {
         async function loadData() {
             if(params.id){
-                console.log("solicitar datos");
+                console.log("Se solicitand los datos del id: " + params.id);
                 const res = await getTipo(params.id);
                 console.log(res);
                 setValue('descripcion', res.data.descripcion);

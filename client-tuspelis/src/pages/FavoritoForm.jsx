@@ -29,7 +29,7 @@ export function FavoritoForm(){
     useEffect(() => {
         async function loadData() {
             if(params.id){
-                console.log("solicitar datos");
+                console.log("Se cargan los datos del id: " + params.id);
                 const res = await getFavorito(params.id);
                 console.log(res);
                 setValue('titulo', res.data.titulo);
@@ -39,29 +39,16 @@ export function FavoritoForm(){
                 setValue('genero', res.data.genero);
                 setValue('id_tipo', res.data.id_tipo);
             }
-        }
-        loadData();
-    },[])
 
-    useEffect(() => {
-        const loadData = async ()  => {
+            //Se cargan los selects
             const data = await getAllTipos();
             console.log(data.data);
             setListaData(data.data);
         }
         loadData();
-    }, [])
+    },[])
 
-    /*
-    {
-    "titulo": "string",
-    "sinopsis": "string",
-    "anio": "stri",
-    "rating_general": 0,
-    "genero": "string",
-    "id_tipo": 0
-    }
-    */
+
     return (
         <div className="container">
             Formulario Favorito
