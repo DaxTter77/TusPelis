@@ -2,7 +2,7 @@ import axios from "axios";
 import { baseUrl } from "../constants/global";
 
 const favoritosApi = axios.create({
-    baseURL: baseUrl + "favoritos"
+    baseURL: `${baseUrl}/api/auth`
 });
 
 export const getAllFavoritos = () => { return favoritosApi.get("/"); }
