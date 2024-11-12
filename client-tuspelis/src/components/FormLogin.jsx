@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { tokenApi } from  "../api/token.api";
+import { authApi } from  "../api/auth.api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants/global";
 
@@ -16,7 +16,7 @@ export function FormLogin({router, method}){
         e.preventDefault()
 
         try{
-            const res=await tokenApi.post(router, {email, password})
+            const res=await authApi.post(router, {email, password})
             console.log(res);
 
             if (method === "login"){

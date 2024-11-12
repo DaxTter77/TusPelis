@@ -6,18 +6,12 @@ import { FavoritoForm } from './pages/FavoritoForm';
 import { FavoritoPagina } from './pages/FavoritoPagina';
 import { FavoritoUserForm } from './pages/FavoritoUserForm';
 import { FavoritoUserPagina } from './pages/FavoritoUserPagina';
-import { Home } from './pages/Home';
-import { ProtectedRoute } from './components/ProtectedRoute';
-
-//Login
+import { Navigation } from './components/navigation';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
-
-//Errors Pages
 import { NotFound } from './pages/NotFound';
-
-//Navigation
-import { Navigation } from './components/navigation';
+import { Home } from './pages/Home';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function Logout(){
   localStorage.clear();
@@ -36,7 +30,6 @@ function App() {
 
       <Routes>
         <Route path="*" element={<Navigate to="/404" />} />
-        <Route path="/404" element={<NotFound />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
@@ -51,6 +44,7 @@ function App() {
         <Route path="/favoritos/:id" element={<ProtectedRoute><FavoritoForm /></ProtectedRoute>} />
         <Route path="/favoritos-user" element={<ProtectedRoute><FavoritoUserPagina /></ProtectedRoute>} />
         <Route path="/favoritos-user/add" element={<ProtectedRoute><FavoritoUserForm /></ProtectedRoute>} />
+        <Route path="/404" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
