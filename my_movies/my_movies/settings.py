@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'my_movies.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tuspelis_db',
+        'NAME': 'tuspelis_db3',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',

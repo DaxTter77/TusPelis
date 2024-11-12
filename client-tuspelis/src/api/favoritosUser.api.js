@@ -1,8 +1,26 @@
 import axios from "axios";
+import { ACCESS_TOKEN } from "../constants/global";
 import { baseUrl } from "../constants/global";
 
 const favoritosUserApi = axios.create({
     baseURL: `${baseUrl}favoritos_user`
 })
 
+favoritosUserApi.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem(ACCESS_TOKEN)
+        if (token){
+            config.headers.Authorization = `Bearer ${token}`
+        }
+        return config
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+)
+
 export const getAllFavoritosUser = async () => { return favoritosUserApi.get("/"); }
+export const createFavoritoUser = (data) => { return favoritosUserApi.post("/", data); }
+export const deleteFavoritoUser = (id) => { return favoritosUserApi.delete(`/${id}/`); }
+export const getFavoritoUser = (id) => { return favoritosUserApi.get(`/${id}/`); }
+export const updateFavoritoUser = (id, data) => { return favoritosUserApi.put(`/${id}/`, data); }
