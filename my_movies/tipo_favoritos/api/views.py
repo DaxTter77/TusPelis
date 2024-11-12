@@ -7,6 +7,6 @@ from tipo_favoritos.api.permissions import IsAdminReadOnly
 
 
 class TipoFavoritoApiViewSet(ModelViewSet):
-    #permission_classes = [IsAdminReadOnly]
+    permission_classes = [IsAdminReadOnly, IsAuthenticated]
     serializer_class = TipoFavoritosSerializer
     queryset = TipoFavorito.objects.all()
