@@ -1,9 +1,22 @@
 import axios from "axios";
-import { baseUrl } from "../constants/global";
+import { ACCESS_TOKEN, baseUrl } from "../constants/global";
 
 const favoritosApi = axios.create({
-    baseURL: `${baseUrl}/api/auth`
+    baseURL: `${baseUrl}favoritos`
 });
+
+favoritosApi.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem(ACCESS_TOKEN);
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+)
 
 export const getAllFavoritos = () => { return favoritosApi.get("/"); }
 export const getFavorito = (id) => { return favoritosApi.get(`/${id}/`); }
