@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 //Importamos las paginas
 import { TipoFavoritoPagina } from './pages/TipoFavoritoPagina';
 import { TipoFavoritoForm } from './pages/TipoFavoritoForm';
@@ -25,7 +25,7 @@ function RegisterAndLogout(){
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col items-center transition duration-200 dark:bg-gray-900 p-10">
+    <div className="min-h-screen flex flex-col items-center transition duration-200 dark:bg-gray-900 p-10 dark:text-white">
 
       <BrowserRouter>
 
@@ -39,26 +39,23 @@ function App() {
 
           {/* Rutas protegidas */}
           <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <div>
-                    <Navigation />
-                    <Routes>
-                      <Route index element={<Home />} />
-                      <Route path="/tipos-favoritos" element={<TipoFavoritoPagina />} />
-                      <Route path="/tipos-favoritos/add" element={<TipoFavoritoForm />} />
-                      <Route path="/tipos-favoritos/:id" element={<TipoFavoritoForm />} />
-                      <Route path="/favoritos" element={<FavoritoPagina />} />
-                      <Route path="/favoritos/add" element={<FavoritoForm />} />
-                      <Route path="/favoritos/:id" element={<FavoritoForm />} />
-                      <Route path="/favoritos-user" element={<FavoritoUserPagina />} />
-                      <Route path="/favoritos-user/add" element={<FavoritoUserForm />} />
-                    </Routes>
-                  </div>
-                </ProtectedRoute>
-              }
-            />
+            element={
+              <ProtectedRoute>
+                <Navigation />
+                <Outlet />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="/" element={<Home />} />
+            <Route path="/tipos-favoritos" element={<TipoFavoritoPagina />} />
+            <Route path="/tipos-favoritos/add" element={<TipoFavoritoForm />} />
+            <Route path="/tipos-favoritos/:id" element={<TipoFavoritoForm />} />
+            <Route path="/favoritos" element={<FavoritoPagina />} />
+            <Route path="/favoritos/add" element={<FavoritoForm />} />
+            <Route path="/favoritos/:id" element={<FavoritoForm />} />
+            <Route path="/favoritos-user" element={<FavoritoUserPagina />} />
+            <Route path="/favoritos-user/add" element={<FavoritoUserForm />} />
+          </Route>
 
           {/* Errors Page */}
           <Route path="/404" element={<NotFound />} />
