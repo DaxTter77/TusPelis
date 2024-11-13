@@ -26,24 +26,39 @@ function RegisterAndLogout(){
 function App() {
   return (
     <BrowserRouter>
-      <Navigation />
 
       <Routes>
         <Route path="*" element={<Navigate to="/404" />} />
 
+        {/* Rutas públicas */}
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
-        
-        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/tipos-favoritos" element={<ProtectedRoute><TipoFavoritoPagina /></ProtectedRoute>} />
-        <Route path="/tipos-favoritos/add" element={<ProtectedRoute><TipoFavoritoForm /></ProtectedRoute>} />
-        <Route path="/tipos-favoritos/:id" element={<ProtectedRoute><TipoFavoritoForm /></ProtectedRoute>} />
-        <Route path="/favoritos" element={<ProtectedRoute><FavoritoPagina /></ProtectedRoute>} />
-        <Route path="/favoritos/add" element={<ProtectedRoute><FavoritoForm /></ProtectedRoute>} />
-        <Route path="/favoritos/:id" element={<ProtectedRoute><FavoritoForm /></ProtectedRoute>} />
-        <Route path="/favoritos-user" element={<ProtectedRoute><FavoritoUserPagina /></ProtectedRoute>} />
-        <Route path="/favoritos-user/add" element={<ProtectedRoute><FavoritoUserForm /></ProtectedRoute>} />
+
+        {/* Rutas protegidas */}
+        <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <div>
+                  <Navigation />
+                  <Routes>
+                    <Route index element={<Home />} />
+                    <Route path="/tipos-favoritos" element={<TipoFavoritoPagina />} />
+                    <Route path="/tipos-favoritos/add" element={<TipoFavoritoForm />} />
+                    <Route path="/tipos-favoritos/:id" element={<TipoFavoritoForm />} />
+                    <Route path="/favoritos" element={<FavoritoPagina />} />
+                    <Route path="/favoritos/add" element={<FavoritoForm />} />
+                    <Route path="/favoritos/:id" element={<FavoritoForm />} />
+                    <Route path="/favoritos-user" element={<FavoritoUserPagina />} />
+                    <Route path="/favoritos-user/add" element={<FavoritoUserForm />} />
+                  </Routes>
+                </div>
+              </ProtectedRoute>
+            }
+          />
+
+        {/* Errors Page */}
         <Route path="/404" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
