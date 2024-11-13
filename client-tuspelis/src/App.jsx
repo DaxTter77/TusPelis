@@ -25,43 +25,46 @@ function RegisterAndLogout(){
 
 function App() {
   return (
-    <BrowserRouter>
+    <div className="min-h-screen flex flex-col items-center transition duration-200 dark:bg-gray-900 p-10">
 
-      <Routes>
-        <Route path="*" element={<Navigate to="/404" />} />
+      <BrowserRouter>
 
-        {/* Rutas públicas */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<RegisterAndLogout />} />
+        <Routes>
+          <Route path="*" element={<Navigate to="/404" />} />
 
-        {/* Rutas protegidas */}
-        <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <div>
-                  <Navigation />
-                  <Routes>
-                    <Route index element={<Home />} />
-                    <Route path="/tipos-favoritos" element={<TipoFavoritoPagina />} />
-                    <Route path="/tipos-favoritos/add" element={<TipoFavoritoForm />} />
-                    <Route path="/tipos-favoritos/:id" element={<TipoFavoritoForm />} />
-                    <Route path="/favoritos" element={<FavoritoPagina />} />
-                    <Route path="/favoritos/add" element={<FavoritoForm />} />
-                    <Route path="/favoritos/:id" element={<FavoritoForm />} />
-                    <Route path="/favoritos-user" element={<FavoritoUserPagina />} />
-                    <Route path="/favoritos-user/add" element={<FavoritoUserForm />} />
-                  </Routes>
-                </div>
-              </ProtectedRoute>
-            }
-          />
+          {/* Rutas públicas */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/register" element={<RegisterAndLogout />} />
 
-        {/* Errors Page */}
-        <Route path="/404" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Rutas protegidas */}
+          <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <div>
+                    <Navigation />
+                    <Routes>
+                      <Route index element={<Home />} />
+                      <Route path="/tipos-favoritos" element={<TipoFavoritoPagina />} />
+                      <Route path="/tipos-favoritos/add" element={<TipoFavoritoForm />} />
+                      <Route path="/tipos-favoritos/:id" element={<TipoFavoritoForm />} />
+                      <Route path="/favoritos" element={<FavoritoPagina />} />
+                      <Route path="/favoritos/add" element={<FavoritoForm />} />
+                      <Route path="/favoritos/:id" element={<FavoritoForm />} />
+                      <Route path="/favoritos-user" element={<FavoritoUserPagina />} />
+                      <Route path="/favoritos-user/add" element={<FavoritoUserForm />} />
+                    </Routes>
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+
+          {/* Errors Page */}
+          <Route path="/404" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 

@@ -35,12 +35,14 @@ export function FormLogin({router, method}){
     };
     
     return <form onSubmit={handleSubmit}>
-        <h1>{name}</h1>
+        <div className="dark:bg-slate-800">
+            <h1>{name}</h1>
 
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" />
 
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
-        <button type="submit">{name}</button>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
+            <button type="submit">{name}</button>
+        </div>
 
     </form>
 
