@@ -12,7 +12,7 @@ class FavoritosUserApiViewSet(ModelViewSet):
     serializer_class = FavoritosUserSerializer
     queryset = FavoritosUser.objects.all()
     
-    @action(detail=False, methods=['get'], url_path="search/(?P<id_user>[0-9]+)")
+    @action(detail=False, methods=['get'], url_path="search/user/(?P<id_user>[0-9]+)")
     def by_user(self, request, pk_int=None, id_user=None):
         if id_user is not None:
             data = FavoritosUser.objects.filter(id_user=id_user)
