@@ -6,12 +6,18 @@ import { FavoritoForm } from './pages/FavoritoForm';
 import { FavoritoPagina } from './pages/FavoritoPagina';
 import { FavoritoUserForm } from './pages/FavoritoUserForm';
 import { FavoritoUserPagina } from './pages/FavoritoUserPagina';
-import { Navigation } from './components/navigation';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
-import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
+
 import { ProtectedRoute } from './components/ProtectedRoute';
+
+//Importamos los errors pages
+import { NotFound } from './pages/NotFound';
+//Importamos el navigation
+import { Navigation } from './components/navigation';
+//Importamos el modulo de notificaciones
+import { Toaster } from 'react-hot-toast'
 
 function Logout(){
   localStorage.clear();
@@ -60,6 +66,7 @@ function App() {
           {/* Errors Page */}
           <Route path="/404" element={<NotFound />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </div>
   )

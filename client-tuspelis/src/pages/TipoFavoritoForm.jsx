@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { createTipo, deleteTipo, updateTipo, getTipo } from '../api/tiposFavoritos.api';
+import { toast } from 'react-hot-toast'
 
 export function TipoFavoritoForm(){
     const { register, handleSubmit, formState: { errors },setValue } = useForm();
@@ -22,6 +23,13 @@ export function TipoFavoritoForm(){
             console.log(res);
         }
         navigate("/tipos-favoritos");
+        toast.success("Registro creado correctamente",{
+            position: "bottom-right",
+            style: {
+                background: "#101010",
+                color: "#ffff"
+            }
+        });
     });
     useEffect(() => {
         async function loadData() {
