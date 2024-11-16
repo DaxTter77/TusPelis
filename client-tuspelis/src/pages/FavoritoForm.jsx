@@ -55,12 +55,12 @@ export function FavoritoForm(){
 
 
     return (
-        <div className="w-full h-full text-3xl text-3xl font-bold text-gray-800 dark:text-gray-200 py-8">
+        <div className="text-center h-full text-3xl text-3xl font-bold text-gray-800 dark:text-gray-200 py-8">
         Añade un Favorito
             <div className="container text-xl bg-gray-700 px-3 rounded-md py-5">
                 <form onSubmit={onSubmit} className="
                 text-black
-                grid grid-cols-[2fr_1fr_2fr] gap-4">
+                grid grid-cols-[2fr_1fr_2fr] gap-4 ">
                     <input type="text" placeholder="Ingrese el titulo" name="txtTitulo" 
                      className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent 
                      border-0 border-b-2 border-gray-300 
