@@ -14,19 +14,32 @@ export function FavoritoForm(){
 
     const onSubmit = handleSubmit(async data => {
         console.log(data);
+        
+        let formData = new FormData();
+        
+        formData.append("titulo", data.titulo);
+        formData.append("sinopsis", data.sinopsis);
+        formData.append("anio", data.anio);
+        formData.append("rating_general", data.rating_general);
+        formData.append("genero", data.genero);
+        formData.append("id_tipo", data.id_tipo);
+
+        // Agregar la imagen si existe
+        if (data.imagen_caratula[0]) {
+            formData.append('imagen_caratula', data.imagen_caratula[0]);
+        }
         //validacion
         if(params.id){
             console.log("modificando");
-            await updateFavorito(params.id, data);
+            await updateFavorito(params.id, formData);
         }else{
-            const res = await createFavorito(data);
+            const res = await createFavorito(formData);
             console.log(res);
             toast.success("Favorito creado", {
                 position: "bottom-right", 
                 style: {backgroundColor: "green", 
                 color: "white"}});
         }
-      
         navigate("/favoritos");
     });
 
@@ -62,11 +75,11 @@ export function FavoritoForm(){
                 text-black
                 grid grid-cols-[2fr_1fr_2fr] gap-4 ">
                     <input type="text" placeholder="Ingrese el titulo" name="txtTitulo" 
-                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent 
-                     border-0 border-b-2 border-gray-300 
-                     appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 
-                     focus:outline-none focus:ring-0 
-                     focus:border-blue-600 peer" id="txtTitulo"  {...register("titulo", { required : true })} />
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent 
+                            border-0 border-b-2 border-gray-300 
+                            appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 
+                            focus:outline-none focus:ring-0 
+                            focus:border-blue-600 peer" id="txtTitulo"  {...register("titulo", { required : true })} />
                     {errors.titulo && <span style={{color:"red"}}>El titulo es requerido</span>}
                     <br />
                     <input type="text" placeholder="Ingrese el sinopsis" name="txtSinopsis" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer col-start-1" id="txtSinopsis" {...register("sinopsis", { required : true })} />
@@ -81,6 +94,11 @@ export function FavoritoForm(){
                     <input type="text" placeholder="Ingrese el genero" name="txtGenero" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer col-start-3 row-start-2" id="txtGenero" {...register("genero", { required : true })} />
                     {errors.genero && <span style={{color:"red"}}>El genero es requerido</span>}
                     <br />
+                    <input 
+                        type="file" 
+                        accept="image/*"
+                        {...register('imagen_caratula')}
+                        />
                     <select name="selTipoFavorito" id="selTipoFavorito" className="rounded-md bg-transparent text-gray-400 underline col-start-3 row-start-3" {...register("id_tipo", { required : true })}>
                         <option value="">Seleccione el tipo de media</option>
                         {
