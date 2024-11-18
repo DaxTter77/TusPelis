@@ -46,19 +46,28 @@ export function TipoFavoritoForm(){
     },[])
 
     return (
-        <div className="container">
-            Formulario Tipo Favorito
+        <div>
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6 pt-8">Formulario Tipo Favorito</h1>
+        <div className="grid-rows-1 center py-2 pb-4 w-full pl-4 text-center bg-gray-700 rounded">
+            
             <form onSubmit={onSubmit}>
-                <input type="text" placeholder="Ingrese la descripción" name="txtDescripcion" id="txtDescripcion" {...register("descripcion", { required : true })} />
+                <input type="text" placeholder="Ingrese la descripción" name="txtDescripcion" 
+                    className="block py-2.5 w-1/2 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none 
+                        dark:text-white dark:border-gray-600 
+                        dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600
+                        inline" id="txtDescripcion" {...register("descripcion", { required : true })} />
                 {errors.descripcion && <span style={{color:"red"}}>La descripción del tipo es requerido</span>}
                 <br />
-                <select name="selEstado" id="selEstado"  {...register("estado", { required : true })}>
+                <select name="selEstado" className="rounded-md bg-transparent text-gray-400 underline p-3" id="selEstado"  {...register("estado", { required : true })}>
                     <option value="">Seleccione un valor</option>
                     <option value="A">Activo</option>
                     <option value="I">Inactivo</option>
                 </select>
                 {errors.estado && <span style={{color:"red"}}>El estado del tipo es requerido</span>}
-                <button>Guardar</button>
+                <br />
+                <button className="px-4 py-2 bg-indigo-600 
+                    text-white rounded-md hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 
+                    transition-colors duration-150 shadow-md">Guardar</button>
             </form>
             {params.id && 
                 (<button
@@ -73,6 +82,7 @@ export function TipoFavoritoForm(){
                     Eliminar
                 </button>)
             }
+        </div>
         </div>
 
     )

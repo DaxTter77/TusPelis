@@ -82,7 +82,12 @@ export function FavoritoForm(){
                             focus:border-blue-600 peer" id="txtTitulo"  {...register("titulo", { required : true })} />
                     {errors.titulo && <span style={{color:"red"}}>El titulo es requerido</span>}
                     <br />
-                    <input type="text" placeholder="Ingrese el sinopsis" name="txtSinopsis" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer col-start-1" id="txtSinopsis" {...register("sinopsis", { required : true })} />
+                    <input type="text" placeholder="Ingrese el sinopsis" name="txtSinopsis" 
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent 
+                            border-0 border-b-2 border-gray-300 
+                            appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 
+                            focus:outline-none focus:ring-0 
+                            focus:border-blue-600 peer col-start-1" id="txtSinopsis" {...register("sinopsis", { required : true })} />
                     {errors.sinopsis && <span style={{color:"red"}}>La sinopsis es requerida</span>}
                     <br />
                     <input type="text" placeholder="Ingrese el año" name="txtAnio" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer col-start-1" id="txtAnio" {...register("anio", { required : true })} />
